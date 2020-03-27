@@ -21,7 +21,8 @@ class MyApp extends StatelessWidget {
         resizeToAvoidBottomInset: false,
 
         body: BlocProvider(
-            create: (context) => AuthBloc(authRepo), child: LoginPage()),
+            create: (context) => AuthBloc(authRepo),
+             child: LoginPage()),
       ),
     );
   }
@@ -39,10 +40,7 @@ class LoginPage extends StatelessWidget {
         } else if(state is AuthIsLoading)
           return Center(child: CircularProgressIndicator(),);
           else if (state is AuthIsLoaded){
-            print('Authenticated');
-
           return  HomePage();
-
           }
           return Center(child: Text('Error'),);
       },

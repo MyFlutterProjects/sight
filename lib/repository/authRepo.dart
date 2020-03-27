@@ -1,7 +1,8 @@
-import 'models/authModel.dart';
+
 import 'package:http/http.dart' as http;
 import 'dart:async';
 import 'dart:convert';
+import 'package:kabali/models/authModel.dart';
 
 class AuthRepo {
   Future<Auth> authenticate(String username, String password) async {
@@ -11,6 +12,7 @@ class AuthRepo {
       headers: <String, String> { 
         'Content-Type': 'application/json; charset=UTF-8'
       },
+      
       body: jsonEncode(<String, String> { 
         'username': username,
         'password': password

@@ -1,7 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:kabali/models/authModel.dart';
 import 'package:kabali/repository/authRepo.dart';
-import 'package:kabali/repository/models/authModel.dart';
 
 class AuthEvent extends Equatable {
   @override 
@@ -58,7 +58,6 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
        try {
          Auth authResponse= await authRepo.authenticate(event._username, event._password);
-         print('bloc');
          yield AuthIsLoaded(authResponse);
 
        } catch(e) {
