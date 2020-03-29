@@ -1,0 +1,74 @@
+import 'package:equatable/equatable.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:kabali/repository/devotionRepo.dart';
+
+
+// Event 
+class DevotionEvent extends Equatable { 
+  @override 
+  List<Object> get props =>[];
+}
+
+class PostDevotionEvent extends DevotionEvent { 
+  final _title;
+  final _body;
+
+  PostDevotionEvent(this._title, this._body);
+
+  @override 
+  List<Object> get props => [_title, _body];
+
+}
+
+
+// State
+class PostDevotionState extends Equatable {
+  @override 
+  List<Object> get props => [];
+}
+
+
+class NotPostedYet extends PostDevotionState {}
+
+class PostingDevotion extends PostDevotionState {}
+
+class PostedADevotion extends PostDevotionState {} 
+
+class PostedDevotionState extends PostDevotionState { 
+  // final  String _response;
+  // PostedDevotionState(this._response);
+  // @override 
+  // List<Object> get props => [_response];
+}
+
+class FailedToPostDevotion extends PostDevotionState {}
+
+// BLOC 
+class DevotionBloc extends Bloc<DevotionEvent, PostDevotionState> { 
+  DevotionRepo devotionRepo;
+
+  DevotionBloc(this.devotionRepo);
+
+  @override 
+  PostDevotionState get initialState => NotPostedYet();
+
+  @override 
+  Stream<PostDevotionState> mapEventToState(DevotionEvent event) async* { 
+    if (event is PostDevotionEvent ) {
+      yield PostingDevotion();
+
+      try { 
+        String response = await devotionRepo.postDevotion(event._body, event._body);
+        print('Bloc now $response');
+        yield PostedADevotion();
+        // yield NotPostedYet();
+
+      } catch (e) {
+        print(e);
+        yield FailedToPostDevotion();
+      }
+    } else {
+      yield NotPostedYet();
+    }
+  }
+}

@@ -4,7 +4,10 @@ class Devotion {
   final String body;
   final String dateCreated;
 
+ 
   Devotion(this.id, this.title, this.body, this.dateCreated);
+
+  
 
   factory Devotion.fromJson(Map<String, dynamic> json) {
     return Devotion(  
