@@ -14,7 +14,7 @@ class DevotionRepo {
 
     print(result.body);
     if (result.statusCode != 200 )
-        throw Exception();
+        throw Exception('Failed to fetch devotions');
     print(result.body);
     var response = json.decode(result.body); 
 
@@ -36,7 +36,7 @@ class DevotionRepo {
       }),
     );
     if (response.statusCode != 200)
-      throw Exception();
+      throw Exception('Failed to post devotion');
     
     var  message = json.decode(response.body);
     print(message['message']);
