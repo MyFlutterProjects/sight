@@ -1,6 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kabali/repository/devotionRepo.dart';
+import 'package:kabali/repository/repository.dart';
 
 
 // Event 
@@ -46,6 +47,7 @@ class FailedToPostDevotion extends PostDevotionState {}
 // BLOC 
 class DevotionBloc extends Bloc<DevotionEvent, PostDevotionState> { 
   DevotionRepo devotionRepo;
+  Repository _repository;
 
   DevotionBloc(this.devotionRepo);
 
@@ -58,7 +60,7 @@ class DevotionBloc extends Bloc<DevotionEvent, PostDevotionState> {
       yield PostingDevotion();
 
       try { 
-        String response = await devotionRepo.postDevotion(event._body, event._body);
+        String response = await _repository.postDevotion(event._title, event._body);
         print('Bloc now $response');
         yield PostedADevotion();
         // yield NotPostedYet();

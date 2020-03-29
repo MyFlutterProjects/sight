@@ -22,7 +22,8 @@ class DevotionRepo {
 
   }
 
-  Future<String> postDevotion(String title, String body) async { 
+  Future<String> createDevotion(String title, String body) async { 
+    print ('here in provider');
     final token = await AuthRepo.read();       
     final response = await http.Client().post(
       this._url, 
