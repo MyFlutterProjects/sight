@@ -28,7 +28,7 @@ class HandlePostingDevotion extends StatelessWidget {
         } else if( state is PostDevotionState) {
           return Center(child: CircularProgressIndicator(),);
           
-        }else if (state is PostedADevotion) {
+        }else if (state is PostedDevotionState) {
           print('Posted a devotion');
           return Center(child: Text('Devotion posted successfully'),);
         } else if  (state is FailedToPostDevotion) {

@@ -3,9 +3,12 @@ import './devotionRepo.dart';
 
 // mediates between the domain and the data mapping layer
 class Repository {
-  DevotionRepo devotionRepo =DevotionRepo();
+  DevotionRepo devotionRepo = DevotionRepo();
 
-  Future<Devotion> fetchDevotions() => devotionRepo.fetchDevotions();
+  // Future<Devotion> fetchDevotions() => devotionRepo.fetchDevotions();
+  Future<Devotion> fetchDeovtions() async {
+    return await devotionRepo.fetchDevotions();
+  }
 
   // Future<String> postDevotion(String title, String body) async => await devotionRepo.createDevotion(title, body);
 
@@ -18,4 +21,5 @@ class Repository {
         return response;
 
   }
+  
 }

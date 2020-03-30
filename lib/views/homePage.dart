@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
-
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:kabali/bloc/fetchDevotionBloc.dart';
+import 'package:kabali/repository/repository.dart';
 import 'package:kabali/views/postDevotion.dart';
+import 'package:kabali/views/showDevotions.dart';
 
 class HomePage extends StatelessWidget {
-  
+      final Repository repository = Repository();
+
   @override
   Widget build(BuildContext context) {
-
+  
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(title: Text('Sight'),        
@@ -38,12 +42,14 @@ class HomePage extends StatelessWidget {
           ],),
       ),
       // backgroundColor: Colors.teal,
-      body: Center( 
-        child: Text('Side Menu tut'),
+      body: BlocProvider( 
+        create: (context) => FetchDevotionBloc(repository: repository),
+        child: ShowDevotions(),
       ),
     );
   }
 }
+
 
 // class Post extends StatelessWidget {
 //   @override

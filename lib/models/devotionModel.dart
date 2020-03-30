@@ -11,7 +11,7 @@ class Devotion {
 
   factory Devotion.fromJson(Map<String, dynamic> json) {
     return Devotion(  
-      json['id'],
+      json['_id'],
       json['title'],
       json['body'],
       json['dateCreated']

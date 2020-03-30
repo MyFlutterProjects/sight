@@ -22,6 +22,7 @@ class PostDevotionEvent extends DevotionEvent {
 }
 
 
+
 // State
 class PostDevotionState extends Equatable {
   @override 
@@ -33,13 +34,13 @@ class NotPostedYet extends PostDevotionState {}
 
 class PostingDevotion extends PostDevotionState {}
 
-class PostedADevotion extends PostDevotionState {} 
+// class PostedADevotion extends PostDevotionState {} 
 
 class PostedDevotionState extends PostDevotionState { 
-  // final  String _response;
-  // PostedDevotionState(this._response);
-  // @override 
-  // List<Object> get props => [_response];
+  final  String _response;
+  PostedDevotionState(this._response);
+  @override 
+  List<Object> get props => [_response];
 }
 
 class FailedToPostDevotion extends PostDevotionState {}
@@ -47,7 +48,7 @@ class FailedToPostDevotion extends PostDevotionState {}
 // BLOC 
 class DevotionBloc extends Bloc<DevotionEvent, PostDevotionState> { 
   DevotionRepo devotionRepo;
-  Repository _repository;
+  // Repository _repository;
 
   DevotionBloc(this.devotionRepo);
 
@@ -60,9 +61,14 @@ class DevotionBloc extends Bloc<DevotionEvent, PostDevotionState> {
       yield PostingDevotion();
 
       try { 
-        String response = await _repository.postDevotion(event._title, event._body);
+        print('yes: ${event._title}, ${event._body}');
+        String response = await devotionRepo.createDevotion(event._title, event._body);
         print('Bloc now $response');
-        yield PostedADevotion();
+
+        if (response != null)
+           yield PostedDevotionState(response);
+
+        // if(event is )
         // yield NotPostedYet();
 
       } catch (e) {

@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kabali/bloc/authBloc.dart';
+import 'package:kabali/helpers/simpleBlocDelegate.dart';
 import 'package:kabali/repository/authRepo.dart';
 import 'package:kabali/views/homePage.dart';
 import 'package:kabali/views/loginForm.dart';
 
-void main() => runApp(MyApp());
+void main() { 
+  WidgetsFlutterBinding.ensureInitialized();
+  BlocSupervisor.delegate = SimpleBlocDelegate();
+  runApp(MyApp());
+}
 
 class MyApp extends StatelessWidget {
   final AuthRepo authRepo = AuthRepo();
